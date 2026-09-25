@@ -1,4 +1,4 @@
-STUDIO PREVIEW 002
+STUDIO PREVIEW 002 — INSTRUMENTED
 PR: #8
-SOURCE_HEAD: a1b91b686d2b1202a82a0da132e1f0e59b7036ac
-PURPOSE: Android/Brave physical retest of post-recording responsiveness fix.
+SOURCE_HEAD: c900d49c969bc7ff930c8c22b0ca3d2487911d04
+PURPOSE: persistent self-diagnosis of post-recording Android/Brave freeze.
