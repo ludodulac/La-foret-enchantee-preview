@@ -1,6 +1,8 @@
-STUDIO PREVIEW 003 — ANDROID POST-STOP ROOT-CAUSE DIAGNOSTIC
-PR: #11
-SOURCE_HEAD: 245cc0cc5ba8c2c4af543ceacd7be7dd5f31a7a6
-BASE_002: 741c54c8770e32a4e279bb51de3400b863fee736
-PURPOSE: one-shot persistent Android/Brave post-STOP forensic capture; diagnostic survives browser reopen.
-ROOT_CAUSE_STATUS: NOT_REPRODUCED_AUTOMATICALLY
+STUDIO PREVIEW 009 — MOBILE CROSS-TRACK DRAG
+SOURCE_PR: #14
+SOURCE_HEAD: 3177ad257519aefc5a28ffc705d1002ce81a7295
+BASE_MAIN: d28e2d4c63afdc2969ba49a524b2f46bfbaddabb
+PURPOSE: Android/Brave one-shot validation of horizontal + cross-track clip drag.
+FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
+FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
+FORENSIC_003_STATUS: preserved unchanged on frozen branch.
