@@ -19,11 +19,20 @@ PURPOSE: Android validation of compact mobile layout, trim handle geometry, near
 FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
 FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
 
-STUDIO PREVIEW 010 — MOBILE SPACE UX / TIMELINE-FIRST REVISION
+
 SOURCE_PR: #15
 SOURCE_HEAD: 945a68ddfa4694aa5862457f1e6b1365fde6dac5
 BASE_MAIN: d19f2e97b4c13d4c035a9b8bc241c374f3e09cfa
 TESTABLE_010_PATH: /studio-010.html
 PURPOSE: Android validation of HEADER -> TRANSPORT -> TIMELINE -> ZOOM -> CLIP CONTEXT -> BOTTOM BAR, split track controls/clip area, small trim handles, vertical/horizontal track navigation.
+FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
+FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
+
+STUDIO PREVIEW 010 — MOBILE SPACE UX / TIMELINE-FIRST + 3D BUTTON MATERIAL
+SOURCE_PR: #15
+SOURCE_HEAD: dedd0a5cd757735b768c123ced4c238627a396f8
+BASE_MAIN: d19f2e97b4c13d4c035a9b8bc241c374f3e09cfa
+TESTABLE_010_PATH: /studio-010.html
+PURPOSE: Final Android gate for timeline-first layout, split track controls/clip area, small trim handles, tactile scrolling, and shared 3D command-button material.
 FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
 FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
