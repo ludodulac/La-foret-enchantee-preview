@@ -6,3 +6,6 @@ PURPOSE: Android/Brave one-shot validation of horizontal + cross-track clip drag
 FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
 FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
 FORENSIC_003_STATUS: preserved unchanged on frozen branch.
+
+TESTABLE_009_PATH: /studio-009.html
+TEST_FIXTURE: ensures at least 2 visible tracks after local restore, then scrolls timeline into view. Preview-only; PR #14 unchanged.
