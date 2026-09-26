@@ -9,3 +9,12 @@ FORENSIC_003_STATUS: preserved unchanged on frozen branch.
 
 TESTABLE_009_PATH: /studio-009.html
 TEST_FIXTURE: ensures at least 2 visible tracks after local restore, then scrolls timeline into view. Preview-only; PR #14 unchanged.
+
+STUDIO PREVIEW 010 — MOBILE SPACE UX
+SOURCE_PR: #15
+SOURCE_HEAD: 7674f8a0bccf81558b9ab547a4f2bc6443b3de3e
+BASE_MAIN: d19f2e97b4c13d4c035a9b8bc241c374f3e09cfa
+TESTABLE_010_PATH: /studio-010.html
+PURPOSE: Android validation of compact mobile layout, trim handle geometry, nearby transport, project/tools menus.
+FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
+FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
