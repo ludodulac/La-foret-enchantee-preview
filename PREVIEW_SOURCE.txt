@@ -64,11 +64,20 @@ PURPOSE: Android retest for explicit 92x34px record-track header touch target us
 FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
 FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
 
-STUDIO PREVIEW 010 — DELETE CLIP + DELETE TRACK RETEST
+
 SOURCE_PR: #15
 SOURCE_HEAD: 46401f782db77f21fef837ad551e2b690f533561
 BASE_MAIN: d19f2e97b4c13d4c035a9b8bc241c374f3e09cfa
 TESTABLE_010_PATH: /studio-010.html
 PURPOSE: Android validation of selected-clip delete, compact track delete, confirmation, armed-track fallback, and retained source identity.
+FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
+FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
+
+STUDIO PREVIEW 010 — CLIP TOOLS VIEWPORT-FIT RETEST
+SOURCE_PR: #15
+SOURCE_HEAD: d668e93689730a8b0d69700e6f2913e39e1a02ab
+BASE_MAIN: d19f2e97b4c13d4c035a9b8bc241c374f3e09cfa
+TESTABLE_010_PATH: /studio-010.html
+PURPOSE: Android validation that selected clip tools remain visible without page scroll; timeline yields height dynamically from real visualViewport.
 FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
 FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
