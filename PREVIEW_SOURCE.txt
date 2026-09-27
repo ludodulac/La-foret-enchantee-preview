@@ -46,11 +46,20 @@ PURPOSE: Android retest for real visual viewport fit, homogeneous empty tracks, 
 FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
 FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
 
-STUDIO PREVIEW 010 — FINAL TRIM HIT + RECORD TRACK RETEST
+
 SOURCE_PR: #15
 SOURCE_HEAD: 08b5d86ec0446feb9e0da7f74b1e8199ce19d305
 BASE_MAIN: d19f2e97b4c13d4c035a9b8bc241c374f3e09cfa
 TESTABLE_010_PATH: /studio-010.html
 PURPOSE: Final Android retest for real 24px trim hit areas and explicit armed record destination track.
+FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
+FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
+
+STUDIO PREVIEW 010 — REAL TRACK HEADER TOUCH SELECTION RETEST
+SOURCE_PR: #15
+SOURCE_HEAD: 8b59cd2cf4ed331b50b9594b32888663e0d0f093
+BASE_MAIN: d19f2e97b4c13d4c035a9b8bc241c374f3e09cfa
+TESTABLE_010_PATH: /studio-010.html
+PURPOSE: Android retest for explicit 92x34px record-track header touch target using direct pointerup; MUTE/VOLUME remain independent.
 FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
 FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
