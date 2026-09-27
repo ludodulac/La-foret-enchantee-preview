@@ -73,11 +73,20 @@ PURPOSE: Android validation of selected-clip delete, compact track delete, confi
 FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
 FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
 
-STUDIO PREVIEW 010 — CLIP TOOLS VIEWPORT-FIT RETEST
+
 SOURCE_PR: #15
 SOURCE_HEAD: d668e93689730a8b0d69700e6f2913e39e1a02ab
 BASE_MAIN: d19f2e97b4c13d4c035a9b8bc241c374f3e09cfa
 TESTABLE_010_PATH: /studio-010.html
 PURPOSE: Android validation that selected clip tools remain visible without page scroll; timeline yields height dynamically from real visualViewport.
+FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
+FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
+
+STUDIO PREVIEW 010 — EXPERT UX CONSOLIDATION
+SOURCE_PR: #15
+SOURCE_HEAD: cfb4d71ba8479f164ebc592e481fc53297134a62
+BASE_MAIN: d19f2e97b4c13d4c035a9b8bc241c374f3e09cfa
+TESTABLE_010_PATH: /studio-010.html
+PURPOSE: Final Android gate for universal active-track destination, direct phone import, five-control transport, tactile track controls, track volume slider, track menu delete, active lane accent, human save vocabulary, and visualViewport fit.
 FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
 FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
