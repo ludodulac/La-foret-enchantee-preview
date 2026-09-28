@@ -120,3 +120,10 @@ TESTABLE_011B_PATH: /studio-011b.html
 PURPOSE: Short Android gate for card ⋯ rename, persisted local name, and discreet current project name in existing editor header.
 FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
 FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
+
+STUDIO PREVIEW 011C — MOBILE RENAME DIALOG + PROJECT DELETE
+SOURCE_PR: #18
+SOURCE_HEAD: 6343114672a3df6a96b24f70fa810ebaad93c81e
+BASE_011B: 1cd45e6fc2b871ff423b2d50646036eab5045741
+TESTABLE_011C_PATH: /studio-011c.html
+PURPOSE: Android gate for visualViewport-safe rename dialog and conservative local project delete; no Blob/source deletion.
