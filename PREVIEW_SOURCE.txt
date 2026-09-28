@@ -90,3 +90,14 @@ TESTABLE_010_PATH: /studio-010.html
 PURPOSE: Final Android gate for universal active-track destination, direct phone import, five-control transport, tactile track controls, track volume slider, track menu delete, active lane accent, human save vocabulary, and visualViewport fit.
 FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
 FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
+
+STUDIO PREVIEW 011A — LOCAL MULTI-PROJECT FOUNDATION
+SOURCE_PR: #16
+SOURCE_BASE_010: cfb4d71ba8479f164ebc592e481fc53297134a62
+SOURCE_HEAD_011A: 40ebf929188432f9e35ade1e8fde429601954b8e
+TESTABLE_011A_PATH: /studio-011a.html
+PURPOSE: Android gate for PROJECT LIBRARY -> NEW/OPEN -> EDITOR -> PROJECTS -> REOPEN, with project-scoped IndexedDB autosave and legacy current-project migration.
+LOCAL_ONLY: YES
+SUPABASE_PROJECT_SYNC: NO
+FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
+FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
