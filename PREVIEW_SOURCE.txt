@@ -141,3 +141,12 @@ SOURCE_HTML_SHA: 9c28876c0b808b75ae34e7f11c20b4ea781ee936
 SOURCE_AUTOSAVE_SHA: 137862d87bf4918195948cb8421d4284cd214dc1
 FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
 FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
+
+STUDIO PREVIEW 011E — EXPORT TO LA FORÊT ENCHANTÉE
+SOURCE_PR: #20
+SOURCE_HEAD: 03ffd6b73ea8f8c6f1e680763edd1c49306537d4
+BASE_011D: 2208e8669f69b41dbaa6c0d547319d31bf07edb1
+TESTABLE_011E_PATH: /studio-011e.html
+HELPER_PATH: /js/audio-publish.js
+PURPOSE: Android gate for one-time WAV mix, local download or publication as a normal audios row using existing audios Storage, plus discreet admin return.
+PREVIEW_ADMIN_NOTE: admin.html in the preview repository is not the production certification surface; the product target remains studio.html -> admin.html in La Forêt Enchantée.
