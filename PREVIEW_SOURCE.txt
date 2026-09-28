@@ -157,3 +157,6 @@ SOURCE_HEAD: c5a3ee72a17afa9c5b66a88eb69efc584fc5012f
 TESTABLE_011E_PATH: /studio-011e.html
 HELPER_MATCH: /js/studio-export-core.js
 PURPOSE: Android validation of multi-minute WAV export with bounded Float32 scratch, exact PCM16 output, pre-decode memory guard, download and Forest destination unchanged.
+
+FINAL_DEPLOY_HEAD: c5a3ee72a17afa9c5b66a88eb69efc584fc5012f
+FINAL_DEPLOY_REQUIRES: studio-011e.html + js/studio-export-core.js exact source blobs
