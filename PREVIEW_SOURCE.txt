@@ -110,3 +110,13 @@ TESTABLE_011A_PATH: /studio-011a.html
 PURPOSE: Android validation of real local project library entry, new project creation, project-scoped autosave, return to project library, reopen exact state, and legacy local-project migration.
 LOCAL_ONLY: YES
 SUPABASE_PROJECT_SYNC: NO
+
+STUDIO PREVIEW 011B — PROJECT RENAME + DISCREET CURRENT PROJECT NAME
+BASE_011B: 40ebf929188432f9e35ade1e8fde429601954b8e
+SOURCE_PR: #17
+SOURCE_HEAD: 1cd45e6fc2b871ff423b2d50646036eab5045741
+STACKED_ON_PR16_HEAD: 40ebf929188432f9e35ade1e8fde429601954b8e
+TESTABLE_011B_PATH: /studio-011b.html
+PURPOSE: Short Android gate for card ⋯ rename, persisted local name, and discreet current project name in existing editor header.
+FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
+FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
