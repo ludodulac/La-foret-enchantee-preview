@@ -91,7 +91,7 @@ PURPOSE: Final Android gate for universal active-track destination, direct phone
 FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
 FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
 
-STUDIO PREVIEW 011A — LOCAL MULTI-PROJECT FOUNDATION
+
 SOURCE_PR: #16
 SOURCE_BASE_010: cfb4d71ba8479f164ebc592e481fc53297134a62
 SOURCE_HEAD_011A: 40ebf929188432f9e35ade1e8fde429601954b8e
@@ -101,3 +101,12 @@ LOCAL_ONLY: YES
 SUPABASE_PROJECT_SYNC: NO
 FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
 FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
+
+STUDIO PREVIEW 011A — LOCAL MULTI-PROJECT FOUNDATION
+SOURCE_PR: #16
+SOURCE_HEAD: 40ebf929188432f9e35ade1e8fde429601954b8e
+BASE_010_HEAD: cfb4d71ba8479f164ebc592e481fc53297134a62
+TESTABLE_011A_PATH: /studio-011a.html
+PURPOSE: Android validation of real local project library entry, new project creation, project-scoped autosave, return to project library, reopen exact state, and legacy local-project migration.
+LOCAL_ONLY: YES
+SUPABASE_PROJECT_SYNC: NO
