@@ -127,3 +127,17 @@ SOURCE_HEAD: 6343114672a3df6a96b24f70fa810ebaad93c81e
 BASE_011B: 1cd45e6fc2b871ff423b2d50646036eab5045741
 TESTABLE_011C_PATH: /studio-011c.html
 PURPOSE: Android gate for visualViewport-safe rename dialog and conservative local project delete; no Blob/source deletion.
+
+
+STUDIO PREVIEW 011D — LAST OPENED + LIVE SEEK + LOCAL ORPHAN GC
+SOURCE_PR: #19
+SOURCE_HEAD: 2208e8669f69b41dbaa6c0d547319d31bf07edb1
+BASE_011C: 6343114672a3df6a96b24f70fa810ebaad93c81e
+TESTABLE_011D_PATH: /studio-011d.html
+PURPOSE: Android gate for last-opened project ordering, playhead drag seek/resume, and reference-safe local orphan audio GC.
+LOCAL_ONLY: YES
+SUPABASE_PROJECT_SYNC: NO
+SOURCE_HTML_SHA: 9c28876c0b808b75ae34e7f11c20b4ea781ee936
+SOURCE_AUTOSAVE_SHA: 137862d87bf4918195948cb8421d4284cd214dc1
+FORENSIC_003_FROZEN_BRANCH: forensic/studio-android-post-stop-003-frozen
+FORENSIC_003_FROZEN_SHA: 81d19123bcbed3852830661945d2ab55ec337d76
