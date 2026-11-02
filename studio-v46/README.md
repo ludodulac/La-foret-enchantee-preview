@@ -1,11 +1,9 @@
-# STUDIO Audio — preview 046 isolée (2 novembre 2026)
+# Studio Audio — prévisualisation isolée (version REC WAV intégré)
 
-Source: `ludodulac/La-foret-enchantee` au commit `a769cfa3caba8bba44bd2020736d1f1ac06a0c79` (PR #46 DRAFT).
+Version source: `ludodulac/La-foret-enchantee`, commit `d06a6285af01c130efa3d1b43cfa0a334a5fd9b7`, PR #46 DRAFT.
 
-Fichier d'entrée: `studio.html`.
+Ouvre `studio.html` dans ce dossier pour un essai sur Android/Brave. Le bouton **REC WAV** du transport enregistre directement par fragments OPFS; le bouton **■** arrête et sauvegarde. Le panneau **MES PRISES WAV** est réservé aux récupérations et téléchargements.
 
-Seules les fonctions locales sont disponibles: enregistrement WAV par AudioWorklet, stockage OPFS, montage multipiste, sauvegarde IndexedDB, mixage WAV, encodage Ogg Opus. Aucun identifiant ou accès Supabase; sonothèque distante, publication et nettoyage de temporaires désactivés.
+Aucune publication distante, aucun accès compte utilisateur, aucune sonothèque distante. Toutes les prises et projets de ce dossier sont séparés des autres versions: IndexedDB `foret-studio-preview-046`, OPFS `studio-wav-preview-046`. Ce sont des prises temporaires de test, sans garantie de stockage permanent. La version publique n'est pas modifiée.
 
-**Isolation**: `foret-studio-preview-046` dans IndexedDB et `studio-wav-preview-046` dans OPFS, pour ne pas réutiliser les prises/projets des précédentes prévisualisations. Le code reste dans ce dossier et ne modifie ni `index.html` ni `studio.html` racine du dépôt de preview. Production `ludodulac/La-foret-enchantee` inchangée, PR #46 toujours DRAFT.
-
-Cible: tests humains 15 secondes avec Redmi/Brave, puis lecture, coupe, sauvegarde, retour, export local. Aucun essai réel de téléphone n'est certifié par les tests CI.
+Tests automatiques: Chromium mobile synthétique 029/030/031 (033 à venir), hors matériel Redmi/Brave réel.
