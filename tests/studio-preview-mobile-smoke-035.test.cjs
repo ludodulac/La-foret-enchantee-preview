@@ -110,7 +110,7 @@ const server=http.createServer(serve);
   assert(sync.monitorPlaying&&sync.sources>0,'Existing track is audible during overdub');
   await page.waitForTimeout(2300);
   await page.locator('#stop').click();
-  assert.equal(await page.evaluate(()=>window.__studioFakeMedia[1].stream.getAudioTracks()[0].readyState),'ended');
+  assert.equal(await page.evaluate(()=>window.__studioFakeMedia.at(-1).stream.getAudioTracks()[0].readyState),'ended');
   await page.waitForFunction(()=>secureCaptureState==='idle'&&clips.length===2,null,{timeout:16000});
   const starts=await page.evaluate(()=>clips.map(c=>({track:c.track,start:c.start,len:c.len})));
   assert.equal(starts[0].start,0);
