@@ -6,6 +6,7 @@ on:
       - 'studio-v46/**'
       - 'tests/studio-preview-mobile-smoke-035.test.cjs'
       - 'tests/studio-preview-latency-calibration-040.test.cjs'
+      - 'tests/studio-preview-touch-navigation-042.test.cjs'
       - '.github/workflows/studio-preview-audio-smoke.yml'
   workflow_dispatch:
 jobs:
@@ -25,3 +26,5 @@ jobs:
         run: node tests/studio-preview-mobile-smoke-035.test.cjs
       - name: Exact-preview latency calibration and automatic musical overdub alignment
         run: node tests/studio-preview-latency-calibration-040.test.cjs
+      - name: Touch navigation and selected-only clip drag on exact public preview files
+        run: node tests/studio-preview-touch-navigation-042.test.cjs
