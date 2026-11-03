@@ -68,8 +68,64 @@ const server=http.createServer(serve);
   await page.locator('#local-project-list .local-project-card').first().click();
   await page.waitForFunction(()=>!document.querySelector('#app').hidden);
   assert.equal(await page.locator('#tracks .clip').count(),1,'A WAV clip survives reload');
+
+  // Verify exact, deployed HTML, not just source PR: a 1-second delayed WAV
+  // decode must finish BEFORE microphone acquisition and guide playback must
+  // be scheduled in the same turn as capture activation.
+  await page.locator('#addtrack').click();
+  await page.locator('#track-controls [data-arm]').nth(1).click();
+  await page.evaluate(()=>{
+    setCursor(0,true);decodedSourceCache.clear();
+    window.__previewMicOriginal=navigator.mediaDevices.getUserMedia;
+    window.__previewMicRequests=0;
+    navigator.mediaDevices.getUserMedia=(...args)=>{
+      window.__previewMicRequests++;
+      return window.__previewMicOriginal(...args);
+    };
+    const decode=ctx.decodeAudioData.bind(ctx);
+    ctx.decodeAudioData=async(...args)=>{
+      window.__previewDecodeStart=performance.now();
+      await new Promise(resolve=>setTimeout(resolve,1100));
+      window.__previewDecodeEnd=performance.now();
+      return decode(...args);
+    };
+  });
+  await page.locator('#record').click();
+  await page.waitForTimeout(280);
+  const preparation=await page.evaluate(()=>({
+    status:secureOverdubPreparing,requests:window.__previewMicRequests,clips:clips.length
+  }));
+  assert.equal(preparation.status,true,'Guide must decode before mic acquisition');
+  assert.equal(preparation.requests,0,'No mic request during guide decode');
+  await page.waitForFunction(()=>secureCaptureState==='recording',null,{timeout:14000});
+  const sync=await page.evaluate(()=>({
+    requests:window.__previewMicRequests,
+    decoderDurationMs:window.__previewDecodeEnd-window.__previewDecodeStart,
+    sync:secureOverdubSync,monitorPlaying:playing,sources:sources.length
+  }));
+  assert.equal(sync.requests,1);
+  assert(sync.decoderDurationMs>=900,'Delayed decoding was actually performed');
+  assert(sync.sync?.guidePreparedBeforeMic===true);
+  assert(sync.sync.monitorStartDelayMs<80,'Monitor source starts together with capture, not late');
+  assert(sync.monitorPlaying&&sync.sources>0,'Existing track is audible during overdub');
+  await page.waitForTimeout(2300);
+  await page.locator('#stop').click();
+  assert.equal(await page.evaluate(()=>window.__studioFakeMedia[1].stream.getAudioTracks()[0].readyState),'ended');
+  await page.waitForFunction(()=>secureCaptureState==='idle'&&clips.length===2,null,{timeout:16000});
+  const starts=await page.evaluate(()=>clips.map(c=>({track:c.track,start:c.start,len:c.len})));
+  assert.equal(starts[0].start,0);
+  assert.equal(starts[1].start,0);
+  assert.notEqual(starts[0].track,starts[1].track);
+  await page.locator('#back-projects').click();
+  await page.reload({waitUntil:'load'});
+  await page.waitForFunction(()=>document.querySelector('#local-project-list .local-project-card'),null,{timeout:12000});
+  await page.locator('#local-project-list .local-project-card').first().click();
+  await page.waitForFunction(()=>!document.querySelector('#app').hidden);
+  assert.equal(await page.locator('#tracks .clip').count(),2,'Both synchronized WAV clips persist after reload');
+  console.log('STUDIO-035 PREVIEW OVERDUB SYNC PASS '+JSON.stringify({preparation,sync,starts}));
+
   assert.deepEqual(errors,[],'No JavaScript runtime errors');
-  console.log('STUDIO-035 PASS — deployed preview: no external network, real WebAudio synthetic mic, visible WAV, immediate STOP release, OPFS+IndexedDB persistence, no remote publication '+JSON.stringify(capture));
+  console.log('STUDIO-035 PASS — deployed preview: no external network, real WebAudio synthetic mic, visible WAV, immediate STOP release, OPFS+IndexedDB persistence, synchronous overdub, no remote publication '+JSON.stringify(capture));
  }finally{
   try{await browser?.close()}catch{}
   if(server.listening)await new Promise(resolve=>server.close(resolve));
