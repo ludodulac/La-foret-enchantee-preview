@@ -1,9 +1,9 @@
-# Studio Audio — prévisualisation isolée (version REC WAV intégré)
+# Studio audio — preview isolée, vérification du 3 novembre 2026
 
-Version source: `ludodulac/La-foret-enchantee`, commit `d06a6285af01c130efa3d1b43cfa0a334a5fd9b7`, PR #46 DRAFT.
+Source : `ludodulac/La-foret-enchantee` commit `9c00cd1ecd90ad5cd8867be3759e477280d4a8c9` (PR #46 DRAFT).
 
-Ouvre `studio.html` dans ce dossier pour un essai sur Android/Brave. Le bouton **REC WAV** du transport enregistre directement par fragments OPFS; le bouton **■** arrête et sauvegarde. Le panneau **MES PRISES WAV** est réservé aux récupérations et téléchargements.
+Enregistrement WAV par le bouton REC WAV et arrêt ■ directement dans l'éditeur, avec curseur et forme d'onde rouge visibles pendant la prise. Lecture manuelle bloquée pendant l'enregistrement. À l'arrêt, sauvegarde WAV fragmentée et insertion automatique sur la piste armée. Menu MES PRISES WAV pour récupération uniquement.
 
-Aucune publication distante, aucun accès compte utilisateur, aucune sonothèque distante. Toutes les prises et projets de ce dossier sont séparés des autres versions: IndexedDB `foret-studio-preview-046`, OPFS `studio-wav-preview-046`. Ce sont des prises temporaires de test, sans garantie de stockage permanent. La version publique n'est pas modifiée.
+Sur le dépôt de preview, aucun accès à Supabase, aucune publication, aucun identifiant réel ; stockage expérimental local séparé des autres versions (IndexedDB `foret-studio-preview-046`, OPFS `studio-wav-preview-046`). Les prises ne sont pas garanties si les données Brave sont effacées. Aucun changement de la production.
 
-Tests automatiques: Chromium mobile synthétique 029/030/031 (033 à venir), hors matériel Redmi/Brave réel.
+Vérifications CI réalisées : rendu mobile Chromium avec vraie API WebAudio + source micro synthétique, progression visible et waveform non vide, deux prises sur deux pistes, sauvegarde/réouverture, lecture, export WAV complet et Opus. Le test matériel réel Redmi/Brave reste distinct des simulations.
