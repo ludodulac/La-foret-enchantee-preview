@@ -1,0 +1,24 @@
+name: Verify isolated Studio Audio preview
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'studio-v46/**'
+      - 'tests/studio-preview-mobile-smoke-035.test.cjs'
+      - '.github/workflows/studio-preview-audio-smoke.yml'
+  workflow_dispatch:
+jobs:
+  mobile-audio-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Install ephemeral headless Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Exact published Studio files, synthetic microphone, local WAV and reload
+        run: node tests/studio-preview-mobile-smoke-035.test.cjs
