@@ -1,9 +1,9 @@
-# Studio audio — preview isolée, vérification du 3 novembre 2026
+# Studio Audio — essai mobile isolé, sécurité du micro (3 novembre 2026)
 
-Source : `ludodulac/La-foret-enchantee` commit `9c00cd1ecd90ad5cd8867be3759e477280d4a8c9` (PR #46 DRAFT).
+Source : `ludodulac/La-foret-enchantee` au commit `b2d6d01594768d3465d8f92914c482f38e66708f`, PR #46 **DRAFT**, production inchangée.
 
-Enregistrement WAV par le bouton REC WAV et arrêt ■ directement dans l'éditeur, avec curseur et forme d'onde rouge visibles pendant la prise. Lecture manuelle bloquée pendant l'enregistrement. À l'arrêt, sauvegarde WAV fragmentée et insertion automatique sur la piste armée. Menu MES PRISES WAV pour récupération uniquement.
+Version d'essai dans `studio.html` : REC WAV/STOP intégrés, progression visible, deux pistes, sauvegarde locale OPFS. Le moteur peut signaler une absence de signal micro, limite l'attente d'ouverture du micro et arrête immédiatement toute prise si le navigateur passe en arrière-plan ; un accès micro accordé après un délai est fermé. Aucun micro n'est nécessaire pour consulter les projets.
 
-Sur le dépôt de preview, aucun accès à Supabase, aucune publication, aucun identifiant réel ; stockage expérimental local séparé des autres versions (IndexedDB `foret-studio-preview-046`, OPFS `studio-wav-preview-046`). Les prises ne sont pas garanties si les données Brave sont effacées. Aucun changement de la production.
+Aucun accès Supabase, aucune publication ni effacement d'anciens projets. Le stockage reste isolé dans IndexedDB `foret-studio-preview-046` et OPFS `studio-wav-preview-046` : ne pas effacer les données du navigateur. Les captures d'écran Android peuvent elles-mêmes entrer en conflit avec un enregistrement microphone ; tester un enregistrement vocal sans capture d'écran en cours pour le diagnostic matériel.
 
-Vérifications CI réalisées : rendu mobile Chromium avec vraie API WebAudio + source micro synthétique, progression visible et waveform non vide, deux prises sur deux pistes, sauvegarde/réouverture, lecture, export WAV complet et Opus. Le test matériel réel Redmi/Brave reste distinct des simulations.
+La validation CI Chromium utilise un microphone synthétique, et inclut une capture muette, un accès tardif au micro et un basculement en arrière-plan. **Elle ne certifie pas l'accès réel du matériel Android.**
