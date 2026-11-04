@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Essai Cloudflare R2 — La Forêt Enchantée</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;color:#f5fff9;background:#0b1e21;font-size:16px}
+*{box-sizing:border-box}body{max-width:690px;margin:auto;padding:20px 14px 60px;line-height:1.55}
+h1{font-size:1.4rem;margin:0 0 7px}h2{font-size:1.07rem}p{margin:10px 0}
+section{background:#153034;border:1px solid #345755;border-radius:12px;padding:17px;margin:15px 0}
+a{color:#b0eeec}button{border:0;border-radius:9px;padding:12px 14px;font-weight:700;color:#0b1e21;background:#a0e5c8;cursor:pointer;min-height:43px}
+button:disabled{opacity:.45;cursor:not-allowed}input[type=file]{max-width:100%;display:block;margin:9px 0 16px}
+small,.muted{color:#afc9c4}.status{padding:12px;min-height:44px;border-radius:8px;background:#12252b;white-space:pre-line;overflow-wrap:anywhere}
+strong{font-weight:700}.warn{color:#ffd699}.ok{color:#a9f0cb}.error{color:#ffbcb9}
+ul{padding-left:19px}.actions{display:flex;flex-wrap:wrap;gap:9px}
+</style>
+</head>
+<body>
+<h1>🌲 Test indépendant : contes sur Cloudflare R2</h1>
+<p>Cette page d'essai <strong>n'est pas le site La Forêt Enchantée</strong>. Elle vérifie les envois MP3 et images vers le stockage R2, sans ajouter de conte à la base de données Supabase.</p>
+<section>
+<h2>1. Vérifier l'autorisation</h2>
+<p>Utilise le même navigateur que lorsque tu es connecté à l'administration de La Forêt Enchantée.</p>
+<div class="actions">
+<button id="verify">Vérifier ma connexion</button>
+<a href="/La-foret-enchantee/admin.html" target="_blank" rel="noopener">Ouvrir l'administration ↗</a>
+</div>
+<p id="auth-status" class="status" role="status">En attente de vérification.</p>
+</section>
+<section>
+<h2>2. Tester l'envoi de fichiers</h2>
+<p class="warn">⚠️ Choisis des fichiers sans information confidentielle : les nouveaux fichiers pourront être écoutés par toute personne possédant leur adresse.</p>
+<label>Petit MP3 de test (maximum 60 Mo)
+<input type="file" id="audio" accept=".mp3,audio/mpeg"></label>
+<label>Image de couverture JPG, PNG ou WebP (facultative, maximum 10 Mo)
+<input type="file" id="image" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"></label>
+<div class="actions">
+<button id="send" disabled>Tester l'envoi sécurisé</button>
+<button id="cleanup" disabled>Supprimer les fichiers de test</button>
+</div>
+<p id="test-status" class="status" role="status">Aucun fichier envoyé.</p>
+<p><small>Le test vérifie le chargement puis la lecture du MP3 (HEAD), sans créer de ligne « conte » dans Supabase. En cas de réussite, supprime les fichiers d'essai avec le bouton ci-dessus.</small></p>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="/La-foret-enchantee/js/supabase.js"></script>
+<script>
+(() => {
+'use strict';
+const WORKER='https://foret-enchantee-stockage.rondes.workers.dev';
+const $=selector=>document.querySelector(selector);
+const refs=[],auth=$('#auth-status'),test=$('#test-status');
+let enabled=false,working=false;
+function display(el,message,className=''){el.textContent=message;el.className='status '+className}
+function buttons(){
+  $('#send').disabled=!enabled||working;
+  $('#cleanup').disabled=!enabled||working||refs.length===0;
+  $('#verify').disabled=working;
+}
+async function token(){
+  if(typeof dbClient==='undefined')throw Error('La connexion Supabase n’a pas pu être chargée.');
+  const {data,error}=await dbClient.auth.getSession();
+  if(error||!data?.session?.access_token)throw Error('Ouvre l’administration dans ce navigateur, connecte-toi, puis reviens ici et recharge cette page.');
+  return data.session.access_token;
+}
+async function check(){
+  enabled=false;buttons();display(auth,'Vérification de ton compte…');
+  try{
+    await token();
+    const {data,error}=await dbClient.rpc('is_app_admin');
+    if(error||data!==true)throw Error('Compte non autorisé pour administrer La Forêt Enchantée.');
+    enabled=true;display(auth,'✅ Session valide et compte administrateur confirmé.','ok');
+  }catch(e){display(auth,e.message,'error')}
+  buttons();
+}
+function validate(file,kind){
+  if(!(file instanceof File)||!file.size)throw Error('Sélectionne un fichier valide.');
+  const ext=(file.name.split('.').pop()||'').toLowerCase();
+  if(kind==='audio'){
+    if(ext!=='mp3'||!['audio/mpeg','audio/mp3',''].includes(file.type))throw Error('Le conte de test doit être un MP3.');
+    if(file.size>60*1024*1024)throw Error('MP3 supérieur à 60 Mo.');
+    return 'audio/mpeg';
+  }
+  const m={jpg:'image/jpeg',jpeg:'image/jpeg',png:'image/png',webp:'image/webp'};
+  if(!m[ext]||(file.type&&m[ext]!==file.type))throw Error('Image JPG, PNG ou WebP uniquement.');
+  if(file.size>10*1024*1024)throw Error('Image supérieure à 10 Mo.');
+  return m[ext];
+}
+async function request(path,init={}){
+  const access=await token();
+  const response=await fetch(WORKER+path,{
+    ...init,headers:{...init.headers,'Authorization':'Bearer '+access},
+    cache:'no-store'
+  });
+  const out=await response.json().catch(()=>({}));
+  if(!response.ok)throw Error(out.error||'Erreur Cloudflare '+response.status);
+  return out;
+}
+async function sendOne(file,kind){
+  const type=validate(file,kind);
+  const result=await request('/api/upload?kind='+kind,{method:'POST',headers:{'Content-Type':type},body:file});
+  if(!/^r2:(?:contes\/[a-z0-9-]+\.mp3|couvertures\/[a-z0-9-]+\.(?:jpg|png|webp))$/i.test(result.path))throw Error('Réponse Cloudflare non reconnue.');
+  refs.push(result.path);
+  const response=await fetch(WORKER+'/media/'+result.path.slice(3),{method:'HEAD',cache:'no-store'});
+  if(!response.ok)throw Error('Fichier écrit mais lecture non confirmée : '+response.status);
+  return result.path;
+}
+async function send(){
+  if(!enabled||working)return;
+  const audioFile=$('#audio').files[0],imgFile=$('#image').files[0];
+  if(!audioFile)return display(test,'Sélectionne d’abord un petit MP3.','error');
+  try{
+    validate(audioFile,'audio');if(imgFile)validate(imgFile,'cover');
+    working=true;buttons();display(test,'Envoi du MP3…');
+    const audPath=await sendOne(audioFile,'audio');
+    display(test,'✅ MP3 enregistré et accessible.\n'+audPath);
+    if(imgFile){
+      display(test,'✅ MP3 confirmé. Envoi de la couverture…');
+      const coverPath=await sendOne(imgFile,'cover');
+      display(test,'✅ MP3 et image enregistrés, lecture vérifiée.\n'+audPath+'\n'+coverPath+'\nClique ensuite sur « Supprimer les fichiers de test ».','ok');
+    }else display(test,'✅ MP3 enregistré et lecture vérifiée.\n'+audPath+'\nClique ensuite sur « Supprimer les fichiers de test ».','ok');
+  }catch(e){
+    display(test,'⚠️ '+e.message+'\nSi le fichier a déjà été envoyé, utilise « Supprimer les fichiers de test ».','error');
+  }finally{working=false;buttons()}
+}
+async function cleanup(){
+  if(!enabled||working||!refs.length)return;
+  working=true;buttons();display(test,'Suppression des fichiers de test…');
+  try{
+    const failed=[];
+    for(const path of [...refs]){
+      try{
+        await request('/api/media/'+path.slice(3),{method:'DELETE'});
+        refs.splice(refs.indexOf(path),1);
+      }catch(e){failed.push(path+' : '+e.message)}
+    }
+    if(failed.length)throw Error(failed.join('\n'));
+    display(test,'✅ Nettoyage terminé. Aucun fichier d’essai conservé.','ok');
+    $('#audio').value='';$('#image').value='';
+  }catch(e){display(test,'⚠️ Nettoyage incomplet : '+e.message,'error')}
+  finally{working=false;buttons()}
+}
+$('#verify').addEventListener('click',check);
+$('#send').addEventListener('click',send);
+$('#cleanup').addEventListener('click',cleanup);
+check();
+})();
+</script>
+</body>
+</html>
