@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Test du formulaire d’administration · Cloudflare R2</title>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/admin-2026.css">
+<link rel="stylesheet" href="css/r2-047-admin-covers.css">
+<style>
+body.admin-experience{min-height:100vh}
+.r2-preview-banner{background:#173d36;border:2px solid #55b693;border-radius:15px;padding:16px 18px;margin:16px 0;color:#edfff5}
+.r2-preview-banner strong{font-size:1.06rem}
+.r2-preview-status{border:2px solid #547d6a;padding:15px;white-space:pre-line;overflow-wrap:anywhere;border-radius:12px;margin:16px 0;line-height:1.6;background:#143a32;color:#edfff5}
+.add-audio-grid{display:grid;grid-template-columns:1fr 1fr;gap:.9rem}
+.upload-hint{font-size:.8rem;margin-top:.35rem}
+.r2-preview-note{color:#fff1bd}
+@media(max-width:650px){.add-audio-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body class="admin-experience">
+<header class="admin-header"><div class="admin-header-inner"><div class="admin-title"><span class="admin-brand-mark">⌁</span><span>La Forêt Enchantée · TEST Cloudflare</span></div></div></header>
+<main class="admin-wrap">
+<div class="r2-preview-banner">
+<strong>🌲 Test du véritable formulaire — PR #47</strong>
+<p>Cette page utilise les mêmes champs, la même logique d'envoi MP3/couverture et les mêmes vérifications que l'administration préparée sur GitHub.</p>
+<p class="r2-preview-note"><strong>Mode sans publication :</strong> après chaque essai, le MP3 et l'image sont supprimés automatiquement de Cloudflare. Aucun conte n'est ajouté, modifié ou supprimé dans Supabase.</p>
+</div>
+<p id="r2-auth-status" class="r2-preview-status" role="status">Vérification de ta session administrateur…</p>
+<div id="r2-form-panel" hidden>
+    <div class="admin-section">
+      <h3>Ajouter une histoire</h3>
+      <form id="form-add-audio" novalidate>
+        <div class="add-audio-grid">
+          <div class="form-group"><label for="audio-title-in">Titre *</label><input type="text" id="audio-title-in" placeholder="Ex : Le Petit Chaperon Rouge" required></div>
+          <div class="form-group"><label for="audio-cat">Catégorie</label><select id="audio-cat"><option value="">— Sélectionner —</option></select></div>
+          <div class="form-group"><label for="audio-sub">Sous-catégorie</label><select id="audio-sub"><option value="">— Aucune —</option></select></div>
+          <div class="form-group"><label for="audio-img">Image de couverture</label><input type="file" id="audio-img" accept="image/*"><div class="upload-hint">JPG, PNG · 600×600 px recommandé</div></div>
+          <div class="form-group" style="grid-column:1/-1"><label for="audio-desc-in">Description</label><textarea id="audio-desc-in" placeholder="Courte description…"></textarea></div>
+          <div class="form-group" style="grid-column:1/-1"><label for="audio-file">Fichier audio *</label><input type="file" id="audio-file" accept=".mp3,audio/mpeg" required><div class="upload-hint">MP3 uniquement pour les contes Cloudflare</div></div>
+        </div>
+        <button type="submit" class="btn-primary" id="btn-add-audio">Tester le vrai formulaire (sans publier)</button>
+      </form>
+    </div>
+
+</div>
+<div id="r2-preview-status" class="r2-preview-status" role="status" aria-live="polite">Préparation du test…</div>
+<p>Pour un résultat valable, sélectionne <strong>un MP3</strong> et une couverture JPG/PNG/WebP. N’utilise pas de fichiers confidentiels : une adresse R2 est publiquement lisible pendant l’essai.</p>
+<p><a href="foret-r2-integration-test.html">← Revenir au test simple Cloudflare R2</a></p>
+</main>
+<div id="notif"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="r2-047-supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/ludodulac/La-foret-enchantee@192c35d8f2adf0eb4fe7b431f3c2b5ad4ec9e211/js/foret-r2-media.js"></script>
+<script src="r2-047-preview-write-guard.js"></script>
+<script src="r2-047-admin-core.js"></script>
+<script src="r2-047-admin-cover-editor.js"></script>
+</body>
+</html>
