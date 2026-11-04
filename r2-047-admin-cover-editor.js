@@ -1,7 +1,8 @@
 // admin-cover-editor.js — permet d’importer une couverture ou de choisir une image finale prête à l’emploi.
 (() => {
-  const BANK_URL = 'assets/covers/manifest.json';
-  const BANK_BASE = 'assets/covers/';
+  // Preview only: reuse the *public* image bank without copying or mutating site assets.
+  const BANK_URL = 'https://ludodulac.github.io/La-foret-enchantee/assets/covers/manifest.json';
+  const BANK_BASE = 'https://ludodulac.github.io/La-foret-enchantee/assets/covers/';
 
   let bank = [];
   const states = new Map();
@@ -278,7 +279,7 @@
       });
 
       uploaded.length = 0;
-      showNotif('Histoire ajoutée avec succès ✓');
+      showNotif('TEST réussi : aucun conte publié ✓');
       event.target.reset();
       reset('add');
       await refreshData();
