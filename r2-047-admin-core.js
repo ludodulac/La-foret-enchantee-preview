@@ -341,7 +341,7 @@ async function handleAddAudio(e) {
     if (dbErr) throw dbErr;
 
     uploaded.length = 0;
-    showNotif('Audio ajouté avec succès ✓');
+    showNotif('TEST réussi : aucun conte publié ✓');
     e.target.reset();
     await refreshData();
     renderAll();
